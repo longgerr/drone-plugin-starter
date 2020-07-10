@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/codegangsta/cli"
 	_ "github.com/joho/godotenv/autoload"
+	"github.com/urfave/cli/v2"
 )
 
 var version string // build number set at compile-time
@@ -22,181 +22,181 @@ func main() {
 		// repo args
 		//
 
-		cli.StringFlag{
-			Name:   "repo.fullname",
-			Usage:  "repository full name",
-			EnvVar: "DRONE_REPO",
+		&cli.StringFlag{
+			Name:    "repo.fullname",
+			Usage:   "repository full name",
+			EnvVars: []string{"DRONE_REPO"},
 		},
-		cli.StringFlag{
-			Name:   "repo.owner",
-			Usage:  "repository owner",
-			EnvVar: "DRONE_REPO_OWNER",
+		&cli.StringFlag{
+			Name:    "repo.owner",
+			Usage:   "repository owner",
+			EnvVars: []string{"DRONE_REPO_OWNER"},
 		},
-		cli.StringFlag{
-			Name:   "repo.name",
-			Usage:  "repository name",
-			EnvVar: "DRONE_REPO_NAME",
+		&cli.StringFlag{
+			Name:    "repo.name",
+			Usage:   "repository name",
+			EnvVars: []string{"DRONE_REPO_NAME"},
 		},
-		cli.StringFlag{
-			Name:   "repo.link",
-			Usage:  "repository link",
-			EnvVar: "DRONE_REPO_LINK",
+		&cli.StringFlag{
+			Name:    "repo.link",
+			Usage:   "repository link",
+			EnvVars: []string{"DRONE_REPO_LINK"},
 		},
-		cli.StringFlag{
-			Name:   "repo.avatar",
-			Usage:  "repository avatar",
-			EnvVar: "DRONE_REPO_AVATAR",
+		&cli.StringFlag{
+			Name:    "repo.avatar",
+			Usage:   "repository avatar",
+			EnvVars: []string{"DRONE_REPO_AVATAR"},
 		},
-		cli.StringFlag{
-			Name:   "repo.branch",
-			Usage:  "repository default branch",
-			EnvVar: "DRONE_REPO_BRANCH",
+		&cli.StringFlag{
+			Name:    "repo.branch",
+			Usage:   "repository default branch",
+			EnvVars: []string{"DRONE_REPO_BRANCH"},
 		},
-		cli.BoolFlag{
-			Name:   "repo.private",
-			Usage:  "repository is private",
-			EnvVar: "DRONE_REPO_PRIVATE",
+		&cli.BoolFlag{
+			Name:    "repo.private",
+			Usage:   "repository is private",
+			EnvVars: []string{"DRONE_REPO_PRIVATE"},
 		},
-		cli.BoolFlag{
-			Name:   "repo.trusted",
-			Usage:  "repository is trusted",
-			EnvVar: "DRONE_REPO_TRUSTED",
+		&cli.BoolFlag{
+			Name:    "repo.trusted",
+			Usage:   "repository is trusted",
+			EnvVars: []string{"DRONE_REPO_TRUSTED"},
 		},
 
 		//
 		// commit args
 		//
 
-		cli.StringFlag{
-			Name:   "remote.url",
-			Usage:  "git remote url",
-			EnvVar: "DRONE_REMOTE_URL",
+		&cli.StringFlag{
+			Name:    "remote.url",
+			Usage:   "git remote url",
+			EnvVars: []string{"DRONE_REMOTE_URL"},
 		},
-		cli.StringFlag{
-			Name:   "commit.sha",
-			Usage:  "git commit sha",
-			EnvVar: "DRONE_COMMIT_SHA",
+		&cli.StringFlag{
+			Name:    "commit.sha",
+			Usage:   "git commit sha",
+			EnvVars: []string{"DRONE_COMMIT_SHA"},
 		},
-		cli.StringFlag{
-			Name:   "commit.ref",
-			Value:  "refs/heads/master",
-			Usage:  "git commit ref",
-			EnvVar: "DRONE_COMMIT_REF",
+		&cli.StringFlag{
+			Name:    "commit.ref",
+			Value:   "refs/heads/master",
+			Usage:   "git commit ref",
+			EnvVars: []string{"DRONE_COMMIT_REF"},
 		},
-		cli.StringFlag{
-			Name:   "commit.branch",
-			Value:  "master",
-			Usage:  "git commit branch",
-			EnvVar: "DRONE_COMMIT_BRANCH",
+		&cli.StringFlag{
+			Name:    "commit.branch",
+			Value:   "master",
+			Usage:   "git commit branch",
+			EnvVars: []string{"DRONE_COMMIT_BRANCH"},
 		},
-		cli.StringFlag{
-			Name:   "commit.message",
-			Usage:  "git commit message",
-			EnvVar: "DRONE_COMMIT_MESSAGE",
+		&cli.StringFlag{
+			Name:    "commit.message",
+			Usage:   "git commit message",
+			EnvVars: []string{"DRONE_COMMIT_MESSAGE"},
 		},
-		cli.StringFlag{
-			Name:   "commit.link",
-			Usage:  "git commit link",
-			EnvVar: "DRONE_COMMIT_LINK",
+		&cli.StringFlag{
+			Name:    "commit.link",
+			Usage:   "git commit link",
+			EnvVars: []string{"DRONE_COMMIT_LINK"},
 		},
-		cli.StringFlag{
-			Name:   "commit.author.name",
-			Usage:  "git author name",
-			EnvVar: "DRONE_COMMIT_AUTHOR",
+		&cli.StringFlag{
+			Name:    "commit.author.name",
+			Usage:   "git author name",
+			EnvVars: []string{"DRONE_COMMIT_AUTHOR"},
 		},
-		cli.StringFlag{
-			Name:   "commit.author.email",
-			Usage:  "git author email",
-			EnvVar: "DRONE_COMMIT_AUTHOR_EMAIL",
+		&cli.StringFlag{
+			Name:    "commit.author.email",
+			Usage:   "git author email",
+			EnvVars: []string{"DRONE_COMMIT_AUTHOR_EMAIL"},
 		},
-		cli.StringFlag{
-			Name:   "commit.author.avatar",
-			Usage:  "git author avatar",
-			EnvVar: "DRONE_COMMIT_AUTHOR_AVATAR",
+		&cli.StringFlag{
+			Name:    "commit.author.avatar",
+			Usage:   "git author avatar",
+			EnvVars: []string{"DRONE_COMMIT_AUTHOR_AVATAR"},
 		},
 
 		//
 		// build args
 		//
 
-		cli.StringFlag{
-			Name:   "build.event",
-			Value:  "push",
-			Usage:  "build event",
-			EnvVar: "DRONE_BUILD_EVENT",
+		&cli.StringFlag{
+			Name:    "build.event",
+			Value:   "push",
+			Usage:   "build event",
+			EnvVars: []string{"DRONE_BUILD_EVENT"},
 		},
-		cli.IntFlag{
-			Name:   "build.number",
-			Usage:  "build number",
-			EnvVar: "DRONE_BUILD_NUMBER",
+		&cli.IntFlag{
+			Name:    "build.number",
+			Usage:   "build number",
+			EnvVars: []string{"DRONE_BUILD_NUMBER"},
 		},
-		cli.IntFlag{
-			Name:   "build.created",
-			Usage:  "build created",
-			EnvVar: "DRONE_BUILD_CREATED",
+		&cli.IntFlag{
+			Name:    "build.created",
+			Usage:   "build created",
+			EnvVars: []string{"DRONE_BUILD_CREATED"},
 		},
-		cli.IntFlag{
-			Name:   "build.started",
-			Usage:  "build started",
-			EnvVar: "DRONE_BUILD_STARTED",
+		&cli.IntFlag{
+			Name:    "build.started",
+			Usage:   "build started",
+			EnvVars: []string{"DRONE_BUILD_STARTED"},
 		},
-		cli.IntFlag{
-			Name:   "build.finished",
-			Usage:  "build finished",
-			EnvVar: "DRONE_BUILD_FINISHED",
+		&cli.IntFlag{
+			Name:    "build.finished",
+			Usage:   "build finished",
+			EnvVars: []string{"DRONE_BUILD_FINISHED"},
 		},
-		cli.StringFlag{
-			Name:   "build.status",
-			Usage:  "build status",
-			Value:  "success",
-			EnvVar: "DRONE_BUILD_STATUS",
+		&cli.StringFlag{
+			Name:    "build.status",
+			Usage:   "build status",
+			Value:   "success",
+			EnvVars: []string{"DRONE_BUILD_STATUS"},
 		},
-		cli.StringFlag{
-			Name:   "build.link",
-			Usage:  "build link",
-			EnvVar: "DRONE_BUILD_LINK",
+		&cli.StringFlag{
+			Name:    "build.link",
+			Usage:   "build link",
+			EnvVars: []string{"DRONE_BUILD_LINK"},
 		},
-		cli.StringFlag{
-			Name:   "build.deploy",
-			Usage:  "build deployment target",
-			EnvVar: "DRONE_DEPLOY_TO",
+		&cli.StringFlag{
+			Name:    "build.deploy",
+			Usage:   "build deployment target",
+			EnvVars: []string{"DRONE_DEPLOY_TO"},
 		},
-		cli.BoolFlag{
-			Name:   "yaml.verified",
-			Usage:  "build yaml is verified",
-			EnvVar: "DRONE_YAML_VERIFIED",
+		&cli.BoolFlag{
+			Name:    "yaml.verified",
+			Usage:   "build yaml is verified",
+			EnvVars: []string{"DRONE_YAML_VERIFIED"},
 		},
-		cli.BoolFlag{
-			Name:   "yaml.signed",
-			Usage:  "build yaml is signed",
-			EnvVar: "DRONE_YAML_SIGNED",
+		&cli.BoolFlag{
+			Name:    "yaml.signed",
+			Usage:   "build yaml is signed",
+			EnvVars: []string{"DRONE_YAML_SIGNED"},
 		},
 
 		//
 		// prev build args
 		//
 
-		cli.IntFlag{
-			Name:   "prev.build.number",
-			Usage:  "previous build number",
-			EnvVar: "DRONE_PREV_BUILD_NUMBER",
+		&cli.IntFlag{
+			Name:    "prev.build.number",
+			Usage:   "previous build number",
+			EnvVars: []string{"DRONE_PREV_BUILD_NUMBER"},
 		},
-		cli.StringFlag{
-			Name:   "prev.build.status",
-			Usage:  "previous build status",
-			EnvVar: "DRONE_PREV_BUILD_STATUS",
+		&cli.StringFlag{
+			Name:    "prev.build.status",
+			Usage:   "previous build status",
+			EnvVars: []string{"DRONE_PREV_BUILD_STATUS"},
 		},
-		cli.StringFlag{
-			Name:   "prev.commit.sha",
-			Usage:  "previous build sha",
-			EnvVar: "DRONE_PREV_COMMIT_SHA",
+		&cli.StringFlag{
+			Name:    "prev.commit.sha",
+			Usage:   "previous build sha",
+			EnvVars: []string{"DRONE_PREV_COMMIT_SHA"},
 		},
 	}
 
 	app.Run(os.Args)
 }
 
-func run(c *cli.Context) {
+func run(c *cli.Context) error {
 	plugin := Plugin{
 		Repo: Repo{
 			Owner:   c.String("repo.owner"),
@@ -231,12 +231,14 @@ func run(c *cli.Context) {
 			},
 		},
 		Config: Config{
-		// plugin-specific parameters
+			// plugin-specific parameters
 		},
 	}
 
 	if err := plugin.Exec(); err != nil {
 		fmt.Println(err)
-		os.Exit(1)
+		return err
 	}
+
+	return nil
 }
